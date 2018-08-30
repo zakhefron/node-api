@@ -16,6 +16,7 @@ const app = express();
 app.set('port', process.env.APP_HOST);
 app.set('host', process.env.APP_HOST);
 
+// This request handler must be the first middleware on the app
 app.use(Raven.requestHandler());
 
 app.use(morgan('tiny', { stream: logStream }));
