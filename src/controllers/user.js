@@ -96,7 +96,7 @@ export class UserController {
    */
   update(req, res) {
     const userId = req.params.userId;
-    return User.findOneAndUpdate(userId, req.body, { upsert: true })
+    return User.findByIdAndUpdate(userId, req.body, { upsert: true })
       .then(() => {
         return res.json({
           message: 'User successfully updated!',
