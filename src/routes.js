@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { UserController } from './controllers/user';
+import {Router} from 'express';
+import {UserController} from './controllers/user';
 
 /**
  * Contains all API routes for the application.

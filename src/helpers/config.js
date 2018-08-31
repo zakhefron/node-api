@@ -2,7 +2,7 @@ import fs from 'fs';
 import ini from 'ini';
 import path from 'path';
 
-import { isPathExist } from './common';
+import {isPathExist} from './common';
 
 export class Config {
   /**
@@ -27,7 +27,7 @@ export class Config {
     const defaultConfig = ini.parse(fs.readFileSync(path.resolve(__dirname, defaultConfigPath), 'utf8'));
     const configOverride = ini.parse(fs.readFileSync(path.resolve(__dirname, configOverridePath), 'utf8'));
 
-    const config = { ...defaultConfig, ...configOverride };
+    const config = {...defaultConfig, ...configOverride};
 
     return config[targetConfig] || defaultValue;
   }

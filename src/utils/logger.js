@@ -1,8 +1,8 @@
 import fs from 'fs';
 import 'winston-daily-rotate-file';
-import winston, { format } from 'winston';
+import winston, {format} from 'winston';
 
-import { Config } from '../helpers/config';
+import {Config} from '../helpers/config';
 
 const LOG_DIR = Config.get('LOG_DIR', 'logs');
 const LOG_LEVEL = Config.get('LOG_LEVEL', 'info');
