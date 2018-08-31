@@ -5,16 +5,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import routes from './routes';
+import { Config } from './helpers/config';
 import logger, { logStream } from './utils/logger';
 
 // Initialize Raven
 // https://docs.sentry.io/clients/node/integrations/express/
-Raven.config(process.env.SENTRY_DSN).install();
+Raven.config(Config.get('SENTRY_DSN', '')).install();
 
 const app = express();
-
-app.set('port', process.env.APP_HOST);
-app.set('host', process.env.APP_HOST);
 
 // This request handler must be the first middleware on the app
 app.use(Raven.requestHandler());
@@ -26,6 +24,6 @@ app.use(bodyParser.json());
 // API Routes
 app.use('/api', routes);
 
-app.listen(app.get('port'), app.get('host'), () => {
-  logger.info(`Server started at http://${app.get('host')}:${app.get('port')}/api`);
+app.listen(Config.get('APP_PORT', ''), Config.get('APP_HOST', ''), () => {
+  logger.info(`Server started at http://${Config.get('APP_HOST', '127.0.0.1')}:${Config.get('APP_PORT', '3000')}/api`);
 });
