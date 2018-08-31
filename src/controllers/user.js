@@ -67,7 +67,17 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  count(req, res) {}
+  count(req, res) {
+    return User.countDocuments()
+      .then((totalUsers) => {
+        return res.json({
+          total: totalUsers,
+        });
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Update the specified resource in storage.
