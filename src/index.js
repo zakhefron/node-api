@@ -24,6 +24,9 @@ app.use(bodyParser.json());
 // API Routes
 app.use('/api', routes);
 
+// This error handler must be before any other error middleware
+app.use(Raven.errorHandler());
+
 app.listen(Config.get('APP_PORT', ''), Config.get('APP_HOST', ''), () => {
   logger.info(`Server started at http://${Config.get('APP_HOST', '127.0.0.1')}:${Config.get('APP_PORT', '3000')}/api`);
 });
