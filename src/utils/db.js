@@ -6,6 +6,7 @@ import { getDatabaseURI } from '../helpers/common';
 const databaseURI = getDatabaseURI();
 
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 const connection = mongoose.connect(
   databaseURI,

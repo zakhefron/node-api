@@ -94,7 +94,18 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  update(req, res) {}
+  update(req, res) {
+    const userId = req.params.userId;
+    return User.findOneAndUpdate(userId, req.body, { upsert: true })
+      .then(() => {
+        return res.json({
+          message: 'User successfully updated!',
+        });
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Remove the specified resource from storage.
