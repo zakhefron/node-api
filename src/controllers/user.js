@@ -27,7 +27,7 @@ export class UserController {
    */
   register(req, res) {
     const user = new User(req.body);
-    user
+    return user
       .save(user)
       .then((user) => {
         return res.json(user);
@@ -43,7 +43,15 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  loadAll(req, res) {}
+  loadAll(req, res) {
+    return User.find({})
+      .then((users) => {
+        return res.json(users);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Load a resource by its id.
