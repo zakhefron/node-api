@@ -59,7 +59,16 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  loadById(req, res) {}
+  loadById(req, res) {
+    const userId = req.params.userId;
+    return User.findById(userId)
+      .then((user) => {
+        return res.json(user);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Return the total amount of a specific resource.
