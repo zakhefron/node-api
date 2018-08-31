@@ -3,6 +3,7 @@ import Raven from 'raven';
 import morgan from 'morgan';
 import express from 'express';
 import bodyParser from 'body-parser';
+import compression from 'compression';
 
 import routes from './routes';
 import { Config } from './helpers/config';
@@ -19,6 +20,8 @@ app.use(Raven.requestHandler());
 
 app.use(morgan('tiny', { stream: logStream }));
 app.use(cors());
+app.use(compression());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // API Routes
