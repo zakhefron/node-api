@@ -13,10 +13,12 @@ const userSchema = new Schema({
     required: true,
     bcrypt: true,
   },
+  // eslint-disable-next-line camelcase
   created_at: {
     type: Date,
     default: Date.now,
   },
+  // eslint-disable-next-line camelcase
   updated_at: {
     type: Date,
     default: Date.now,
