@@ -19,8 +19,8 @@ router.route('/users/register').post(userController.register);
 
 router.route('/users').get(userController.loadAll);
 router.route('/users/count').get(userController.count);
-router.route('/users/{:userId}').get(userController.loadById);
-router.route('/users/{:userId}').patch(userController.update);
-router.route('/users/{:userId}').delete(userController.destroy);
+router.route('/users/:userId').get(userController.loadById);
+router.route('/users/:userId').patch(userController.update);
+router.route('/users/:userId').delete(userController.destroy);
 
 export default router;
