@@ -5,9 +5,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 
+import './utils/db';
 import routes from './routes';
-import {Config} from './helpers/config';
-import logger, {logStream} from './utils/logger';
+import { Config } from './helpers/config';
+import logger, { logStream } from './utils/logger';
 
 // Initialize Raven
 // https://docs.sentry.io/clients/node/integrations/express/
@@ -18,10 +19,10 @@ const app = express();
 // This request handler must be the first middleware on the app
 app.use(Raven.requestHandler());
 
-app.use(morgan('tiny', {stream: logStream}));
+app.use(morgan('tiny', { stream: logStream }));
 app.use(cors());
 app.use(compression());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // API Routes

@@ -1,3 +1,7 @@
+import Boom from 'boom';
+
+import User from '../models/user';
+
 export class UserController {
   /**
    * Get user from jwt.
@@ -21,7 +25,17 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  register(req, res) {}
+  register(req, res) {
+    const user = new User(req.body);
+    user
+      .save(user)
+      .then((user) => {
+        return res.json(user);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Display a listing of the resource.

@@ -1,5 +1,5 @@
-import {Router} from 'express';
-import {UserController} from './controllers/user';
+import { Router } from 'express';
+import { UserController } from './controllers/user';
 
 /**
  * Contains all API routes for the application.
@@ -15,7 +15,7 @@ router.route('/').get((req, res) => {
 
 router.route('/users/me').post(userController.me);
 router.route('/users/login').post(userController.login);
-router.route('/user/register').post(userController.register);
+router.route('/users/register').post(userController.register);
 
 router.route('/users').get(userController.loadAll);
 router.route('/users/count').get(userController.count);

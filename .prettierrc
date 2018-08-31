@@ -7,5 +7,5 @@
   "semi": true,
   "arrowParens": "always",
   "parser": "babylon",
-  "bracketSpacing": false
+  "bracketSpacing": true
 }

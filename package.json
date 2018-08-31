@@ -6,7 +6,7 @@
   "main": "dist",
   "scripts": {
     "start": "node dist",
-    "prettify": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"__tests__/**/*.js\"",
+    "prettify": "prettier --write \"src/**/*.js\" \"__tests__/**/*.js\"",
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
     "prestart": "npm run -s build",
@@ -42,7 +42,7 @@
     "winston-daily-rotate-file": "3.3.2"
   },
   "devDependencies": {
-    "@types/express": "^4.16.0",
+    "@types/express": "4.16.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
