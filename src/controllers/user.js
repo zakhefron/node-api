@@ -113,5 +113,16 @@ export class UserController {
    * @param {object} req
    * @param {object} res
    */
-  destroy(req, res) {}
+  destroy(req, res) {
+    const userId = req.params.userId;
+    return User.findByIdAndRemove(userId)
+      .then(() => {
+        return res.json({
+          message: 'User successfully deleted!',
+        });
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 }
