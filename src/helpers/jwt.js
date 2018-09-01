@@ -4,16 +4,12 @@ class Jwt {
    *
    * @param {*} data
    */
-  generateToken(data) {
-
-  }
+  generateToken(data) {}
 
   /**
    * Decode a provided jwt token.
    *
    * @param {string} token
    */
-  decodeJwtToken(token) {
-
-  }
+  decodeJwtToken(token) {}
 }
