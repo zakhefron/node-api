@@ -10,3 +10,9 @@ export const isPathExist = (filePath) => {
 export const getDatabaseURI = () => {
   return `mongodb://${Config.get('MONGODB_HOST', '127.0.0.1')}:${Config.get('MONGODB_PORT', '27017')}/${Config.get('MONGODB_DATABASE', 'node_api')}`;
 };
+
+export const getJWTExpiresDate = () => {
+  const timeObject = new Date();
+  timeObject.setSeconds(parseInt(Config.get('JWT_EXPIRE', 3600)));
+  return timeObject;
+};

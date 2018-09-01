@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { check } from 'express-validator/check';
+
 import { UserController } from './controllers/user';
 
 /**
@@ -14,7 +16,17 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/users/me').post(userController.me);
-router.route('/users/login').post(userController.login);
+router.route('/users/login').post(
+  [
+    check('email')
+      .isEmail()
+      .withMessage('The email address is not a valid email.'),
+    check('password')
+      .isLength({ min: 5 })
+      .withMessage('The password must be at least 5 chars long.'),
+  ],
+  userController.login
+);
 router.route('/users/register').post(userController.register);
 
 router.route('/users').get(userController.loadAll);

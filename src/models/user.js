@@ -1,5 +1,6 @@
-import bcrypt from 'mongoose-bcrypt';
 import mongoose, { Schema } from 'mongoose';
+import * as bcrypt from 'bcrypt';
+import { dd } from 'dumper.js';
 
 const userSchema = new Schema({
   email: {
@@ -11,7 +12,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    bcrypt: true,
   },
   // eslint-disable-next-line camelcase
   created_at: {
@@ -25,7 +25,14 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.plugin(bcrypt);
+userSchema.pre('save', function(next) {
+  this.password = bcrypt.hashSync(this.password, 10);
+  next();
+});
+
+userSchema.statics.comparePassword = (plainPassword, hashPassword) => {
+  return bcrypt.compareSync(plainPassword, hashPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 
