@@ -1,7 +1,9 @@
 import Boom from 'boom';
+import { dd } from 'dumper.js';
 import * as HttpStatus from 'http-status-codes';
 
 import Tag from '../models/tag';
+import Post from '../models/post';
 
 export class TagController {
   /**
@@ -127,7 +129,17 @@ export class TagController {
    * @param {*} req
    * @param {*} res
    */
-  getUserAllTags(req, res) {}
+  getUserAllTags(req, res) {
+    const userId = req.params.userId;
+    // eslint-disable-next-line camelcase
+    return Tag.find({ user_id: userId })
+      .then((tags) => {
+        return res.status(HttpStatus.OK).json(tags);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 
   /**
    * Get all posts of a specific tag.
@@ -135,5 +147,16 @@ export class TagController {
    * @param {*} req
    * @param {*} res
    */
-  getTagPosts(req, res) {}
+  getTagPosts(req, res) {
+    const tagId = req.params.tagId;
+
+    // eslint-disable-next-line camelcase
+    Post.find({ tag_id: tagId })
+      .then((tags) => {
+        return res.status(HttpStatus.OK).json(tags);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 }
