@@ -28,7 +28,7 @@ router.route('/users/login').post(
       .isLength({ min: 5 })
       .withMessage('The password must be at least 5 chars long.'),
   ],
-  userController.login,
+  userController.login
 );
 router.route('/users/me').post(userController.me);
 router.route('/users').get(userController.loadAll);
