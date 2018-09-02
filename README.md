@@ -10,15 +10,6 @@
     </a>
     <a class="badge-align" href="https://www.codacy.com/app/Meabed/node-api">
       <img src="https://img.shields.io/codacy/grade/266923eec70e41418be8f981a5b4cefe.svg?style=flat-square"/>
-    </a>        
-    <a href="https://scrutinizer-ci.com/g/me-io/node-api/?branch=master">
-      <img src="https://img.shields.io/scrutinizer/g/me-io/node-api/master.svg?style=flat-square" alt="Scrutinizer Code Quality">
-    </a>
-    <a href="https://codecov.io/gh/me-io/node-api">
-      <img src="https://img.shields.io/codecov/c/github/me-io/node-api/master.svg?style=flat-square" alt="codecov">
-    </a>
-    <a href="https://packagist.org/packages/me-io/node-api/">
-      <img src="https://img.shields.io/packagist/dm/me-io/node-api.svg?style=flat-square" alt="Packagist">
     </a>
     <a href="https://www.paypal.me/meabed">
       <img src="https://img.shields.io/badge/paypal-Buy_Me_Coffee-179BD7.svg?style=flat-squares" alt="Buy Me Coffee">
