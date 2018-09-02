@@ -12,7 +12,9 @@ export class UserController {
    * @param {*} req
    * @param {*} res
    */
-  me(req, res) {}
+  me(req, res) {
+    return res.status(HttpStatus.OK).json(req.auth);
+  }
 
   /**
    * Login user by generating a new jwt token.
@@ -45,7 +47,7 @@ export class UserController {
 
     const jwtToken = generateJWTToken(user.toObject({ getters: true }));
 
-    return res.json(jwtToken);
+    return res.status(HttpStatus.OK).json(jwtToken);
   }
 
   /**
@@ -59,7 +61,7 @@ export class UserController {
     return user
       .save(user)
       .then((user) => {
-        return res.json(user);
+        return res.status(HttpStatus.OK).json(user);
       })
       .catch((err) => {
         return res.json(Boom.internal(err));
@@ -92,7 +94,7 @@ export class UserController {
     const userId = req.params.userId;
     return User.findById(userId)
       .then((user) => {
-        return res.json(user);
+        return res.status(HttpStatus.OK).json(user);
       })
       .catch((err) => {
         return res.json(Boom.internal(err));
@@ -108,7 +110,7 @@ export class UserController {
   count(req, res) {
     return User.countDocuments()
       .then((totalUsers) => {
-        return res.json({
+        return res.status(HttpStatus.OK).json({
           total: totalUsers,
         });
       })
@@ -127,7 +129,7 @@ export class UserController {
     const userId = req.params.userId;
     return User.findByIdAndUpdate(userId, req.body)
       .then(() => {
-        return res.json({
+        return res.status(HttpStatus.OK).json({
           message: 'User successfully updated!',
         });
       })
@@ -146,7 +148,7 @@ export class UserController {
     const userId = req.params.userId;
     return User.findByIdAndRemove(userId)
       .then(() => {
-        return res.json({
+        return res.status(HttpStatus.OK).json({
           message: 'User successfully deleted!',
         });
       })

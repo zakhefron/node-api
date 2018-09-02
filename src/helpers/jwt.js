@@ -28,7 +28,13 @@ export const generateJWTToken = (data) => {
  */
 export const decodeJwtToken = (token) => {
   try {
-    return jwt.verify(token, JWT_SECRET, JWT_OPTIONS);
+    const decoded = jwt.verify(token, JWT_SECRET, JWT_OPTIONS);
+
+    // Remove unnecessary jwt related keys
+    delete decoded.iat;
+    delete decoded.exp;
+
+    return decoded;
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       return {
