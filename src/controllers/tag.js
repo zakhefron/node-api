@@ -27,6 +27,15 @@ export class TagController {
   count(req, res) {}
 
   /**
+   * Create a new resource in storage.
+   *
+   * @param {*} req
+   * @param {*} res
+   * @return {Promise<any | never>}
+   */
+  create(req, res) {}
+
+  /**
    * Update the specified resource in storage.
    *
    * @param {*} req
