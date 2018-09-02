@@ -120,4 +120,20 @@ export class TagController {
         return res.json(Boom.internal(err));
       });
   }
+
+  /**
+   * Get all tags of a user.
+   *
+   * @param {*} req
+   * @param {*} res
+   */
+  getUserAllTags(req, res) {}
+
+  /**
+   * Get all posts of a specific tag.
+   *
+   * @param {*} req
+   * @param {*} res
+   */
+  getTagPosts(req, res) {}
 }

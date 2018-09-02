@@ -52,4 +52,9 @@ router.route('/posts/:postId').get(postController.loadById);
 router.route('/posts/:postId').patch(postController.update);
 router.route('/posts/:postId').delete(postController.destroy);
 
+// Mixed routes
+router.route('/tags/:tagId/posts').get(tagController.getTagPosts);
+router.route('/users/:userId/tags').get(tagController.getUserAllTags);
+router.route('/users/:userId/posts').get(postController.getUserAllPosts);
+
 export default router;

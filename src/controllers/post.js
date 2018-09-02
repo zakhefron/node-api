@@ -120,4 +120,12 @@ export class PostController {
         return res.json(Boom.internal(err));
       });
   }
+
+  /**
+   * Get all posts a specific user.
+   *
+   * @param {*} req
+   * @param {*} res
+   */
+  getUserAllPosts(req, res) {}
 }

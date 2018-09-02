@@ -15,6 +15,11 @@ const postSchema = new Schema({
     required: true,
   },
   // eslint-disable-next-line camelcase
+  tag_id: {
+    type: String,
+    required: true,
+  },
+  // eslint-disable-next-line camelcase
   created_at: {
     type: Date,
     default: Date.now,
