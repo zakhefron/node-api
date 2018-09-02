@@ -1,3 +1,4 @@
+import { dd } from 'dumper.js';
 import mongoose, { Schema } from 'mongoose';
 
 const tagSchema = new Schema({
@@ -13,6 +14,7 @@ const tagSchema = new Schema({
     type: String,
     required: true,
   },
+  // eslint-disable-next-line camelcase
   user_id: {
     type: String,
     required: true,

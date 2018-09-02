@@ -81,7 +81,7 @@ export class UserController {
   loadAll(req, res) {
     return User.find({})
       .then((users) => {
-        return res.json(users);
+        return res.status(HttpStatus.OK).json(users);
       })
       .catch((err) => {
         return res.json(Boom.internal(err));
