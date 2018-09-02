@@ -1,6 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
 import * as bcrypt from 'bcrypt';
-import { dd } from 'dumper.js';
+import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema({
   email: {

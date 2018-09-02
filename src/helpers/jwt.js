@@ -13,6 +13,7 @@ const JWT_SECRET = Config.get('JWT_SECRET', 'node-api');
  * Generate a jwt secret token for user.
  *
  * @param {*} data
+ * @return {object}
  */
 export const generateJWTToken = (data) => {
   return {
@@ -25,6 +26,7 @@ export const generateJWTToken = (data) => {
  * Decode a provided jwt token.
  *
  * @param {string} token
+ * @return {*}
  */
 export const decodeJwtToken = (token) => {
   try {

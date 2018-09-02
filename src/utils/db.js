@@ -17,6 +17,7 @@ const connection = mongoose.connect(
     useNewUrlParser: true,
   }
 );
+
 connection
   .then((db) => {
     logger.info(`Successfully connected to ${databaseURI}`);

@@ -11,6 +11,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Response}
    */
   me(req, res) {
     return res.status(HttpStatus.OK).json(req.auth);
@@ -21,6 +22,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<Response>}
    */
   async login(req, res) {
     const errors = validationResult(req);
@@ -55,6 +57,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<T | never>}
    */
   register(req, res) {
     const user = new User(req.body);
@@ -73,6 +76,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<T | never>}
    */
   loadAll(req, res) {
     return User.find({})
@@ -89,6 +93,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<any | never>}
    */
   loadById(req, res) {
     const userId = req.params.userId;
@@ -106,6 +111,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<any | never>}
    */
   count(req, res) {
     return User.countDocuments()
@@ -124,6 +130,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<any | never>}
    */
   update(req, res) {
     const userId = req.params.userId;
@@ -143,6 +150,7 @@ export class UserController {
    *
    * @param {*} req
    * @param {*} res
+   * @return {Promise<any | never>}
    */
   destroy(req, res) {
     const userId = req.params.userId;

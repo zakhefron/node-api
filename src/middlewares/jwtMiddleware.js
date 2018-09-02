@@ -8,6 +8,7 @@ import { decodeJwtToken } from '../helpers/jwt';
  * @param {*} req
  * @param {*} res
  * @param {*} next
+ * @return {Response}
  */
 export const jwtMiddleware = (req, res, next) => {
   const token = req.query.token;
