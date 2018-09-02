@@ -1,9 +1,11 @@
 import Boom from 'boom';
+import mongoose from 'mongoose';
 import * as HttpStatus from 'http-status-codes';
 import { validationResult } from 'express-validator/check';
 
 import User from '../models/user';
 import { generateJWTToken } from '../helpers/jwt';
+import { dd } from 'dumper.js';
 
 export class UserController {
   /**
@@ -163,5 +165,38 @@ export class UserController {
       .catch((err) => {
         return res.json(Boom.internal(err));
       });
+  }
+
+  /**
+   * Put the user detail inside passed collection.
+   *
+   * @param {array} collection
+   */
+  static async populateUserDetail(collection) {
+    const userIds = [];
+    collection.forEach((item) => {
+      userIds.push(mongoose.Types.ObjectId(item.user_id));
+    });
+
+    const users = await User.find(
+      {
+        _id: {
+          $in: userIds,
+        },
+      },
+      '_id email'
+    );
+
+    // transform users key by user_id
+    const usersKeyBy = [];
+    users.forEach(user => {
+      usersKeyBy[user['_id']] = user;
+    });
+
+    collection.forEach(item => {
+      item.userDetail = usersKeyBy[item['user_id']] || {};
+    });
+
+    return collection;
   }
 }

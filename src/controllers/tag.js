@@ -3,6 +3,8 @@ import * as HttpStatus from 'http-status-codes';
 
 import Tag from '../models/tag';
 import Post from '../models/post';
+import { UserController } from './user';
+import { dd } from 'dumper.js';
 
 export class TagController {
   /**
@@ -13,8 +15,9 @@ export class TagController {
    * @return {Promise<T | never>}
    */
   loadAll(req, res) {
-    return Tag.find({})
-      .then((tags) => {
+    return Tag.find({}).lean()
+      .then( async (tags) => {
+        tags = await UserController.populateUserDetail(tags);
         return res.status(HttpStatus.OK).json(tags);
       })
       .catch((err) => {
