@@ -5,7 +5,6 @@ import { validationResult } from 'express-validator/check';
 
 import User from '../models/user';
 import { generateJWTToken } from '../helpers/jwt';
-import { dd } from 'dumper.js';
 
 export class UserController {
   /**

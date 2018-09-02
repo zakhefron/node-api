@@ -1,10 +1,10 @@
 import Boom from 'boom';
+import mongoose from 'mongoose';
 import * as HttpStatus from 'http-status-codes';
 
 import Tag from '../models/tag';
 import Post from '../models/post';
 import { UserController } from './user';
-import { dd } from 'dumper.js';
 
 export class TagController {
   /**
@@ -162,4 +162,51 @@ export class TagController {
         return res.json(Boom.internal(err));
       });
   }
+
+  /**
+   * Put the tag detail inside passed collection.
+   *
+   * @param {array} collection
+   */
+  static async populateTagDetailInCollection(collection) {
+    const tagIds = [];
+
+    collection.forEach((item) => {
+      tagIds.push(mongoose.Types.ObjectId(item.tag_id));
+    });
+
+    const tags = await Tag.find(
+      {
+        _id: {
+          $in: tagIds,
+        },
+      }
+    );
+
+    // transform tags key by tag_id
+    const tagsKeyBy = [];
+    tags.forEach(tag => {
+      tagsKeyBy[tag['_id']] = tag;
+    });
+
+    collection.forEach(item => {
+      item.tagDetail = tagsKeyBy[item['tag_id']] || {};
+    });
+
+    return collection;
+  }
+
+  /**
+   * Put the tag detail inside passed object.
+   *
+   * @param {object} object
+   */
+  static async populateTagDetailInObject(object) {
+    const tagId = object.tag_id;
+
+    object.tagDetail = await Tag.findById(tagId);
+
+    return object;
+  }
 }
+

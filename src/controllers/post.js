@@ -2,7 +2,9 @@ import Boom from 'boom';
 import * as HttpStatus from 'http-status-codes';
 
 import Post from '../models/post';
+import { TagController } from './tag';
 import { UserController } from './user';
+import { dd } from 'dumper.js';
 
 export class PostController {
   /**
@@ -16,6 +18,7 @@ export class PostController {
     return Post.find({}).lean()
       .then(async (posts) => {
         posts = await UserController.populateUserDetail(posts);
+        posts = await TagController.populateTagDetailInCollection(posts);
         return res.status(HttpStatus.OK).json(posts);
       })
       .catch((err) => {
@@ -32,8 +35,9 @@ export class PostController {
    */
   loadById(req, res) {
     const postId = req.params.postId;
-    return Post.findById(postId)
-      .then((post) => {
+    return Post.findById(postId).lean()
+      .then(async (post) => {
+        post = await TagController.populateTagDetailInObject(post);
         return res.status(HttpStatus.OK).json(post);
       })
       .catch((err) => {
