@@ -1,3 +1,4 @@
+import unless from 'express-unless';
 import * as HttpStatus from 'http-status-codes';
 
 import { decodeJwtToken } from '../helpers/jwt';
@@ -29,3 +30,5 @@ export const jwtMiddleware = (req, res, next) => {
 
   next();
 };
+
+jwtMiddleware.unless = unless;
