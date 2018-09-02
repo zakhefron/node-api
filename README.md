@@ -22,7 +22,6 @@
 * API CRUD with MongoDB Collection persistence. " KIS & VS" "Keep It Simple and Very Stupid"
 * JWT Authentication
 * Middleware "CORS, JWT"
-* Event Handling
 * Endpoint Tests and Unit Tests
 * CI - [Travis CI](https://travis-ci.org/)
 
