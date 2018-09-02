@@ -127,5 +127,16 @@ export class PostController {
    * @param {*} req
    * @param {*} res
    */
-  getUserAllPosts(req, res) {}
+  getUserAllPosts(req, res) {
+    const userId = req.params.userId;
+
+    // eslint-disable-next-line camelcase
+    Post.find({ user_id: userId })
+      .then((posts) => {
+        return res.status(HttpStatus.OK).json(posts);
+      })
+      .catch((err) => {
+        return res.json(Boom.internal(err));
+      });
+  }
 }

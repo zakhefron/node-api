@@ -1,5 +1,4 @@
 import Boom from 'boom';
-import { dd } from 'dumper.js';
 import * as HttpStatus from 'http-status-codes';
 
 import Tag from '../models/tag';
