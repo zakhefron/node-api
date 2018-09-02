@@ -26,12 +26,12 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(jwtMiddleware.unless({
-  // JWT Middleware won't run on the following paths.
-  path: [
-    '/api/users/register'
-  ]
-}));
+app.use(
+  jwtMiddleware.unless({
+    // JWT Middleware won't run on the following paths.
+    path: ['/api/users/register'],
+  })
+);
 
 // API Routes
 app.use('/api', routes);
