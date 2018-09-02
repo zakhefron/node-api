@@ -4,7 +4,6 @@ import * as HttpStatus from 'http-status-codes';
 import Post from '../models/post';
 import { TagController } from './tag';
 import { UserController } from './user';
-import { dd } from 'dumper.js';
 
 export class PostController {
   /**
@@ -17,7 +16,7 @@ export class PostController {
   loadAll(req, res) {
     return Post.find({}).lean()
       .then(async (posts) => {
-        posts = await UserController.populateUserDetail(posts);
+        posts = await UserController.populateUserDetailInCollection(posts);
         posts = await TagController.populateTagDetailInCollection(posts);
         return res.status(HttpStatus.OK).json(posts);
       })
@@ -38,6 +37,7 @@ export class PostController {
     return Post.findById(postId).lean()
       .then(async (post) => {
         post = await TagController.populateTagDetailInObject(post);
+        post = await UserController.populateUserDetailInObject(post);
         return res.status(HttpStatus.OK).json(post);
       })
       .catch((err) => {

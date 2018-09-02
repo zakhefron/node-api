@@ -17,7 +17,7 @@ export class TagController {
   loadAll(req, res) {
     return Tag.find({}).lean()
       .then( async (tags) => {
-        tags = await UserController.populateUserDetail(tags);
+        tags = await UserController.populateUserDetailInCollection(tags);
         return res.status(HttpStatus.OK).json(tags);
       })
       .catch((err) => {
@@ -35,7 +35,8 @@ export class TagController {
   loadById(req, res) {
     const tagId = req.params.tagId;
     return Tag.findById(tagId)
-      .then((tag) => {
+      .then(async (tag) => {
+        tag = await UserController.populateUserDetailInObject(tag);
         return res.status(HttpStatus.OK).json(tag);
       })
       .catch((err) => {

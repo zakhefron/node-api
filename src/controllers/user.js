@@ -171,7 +171,7 @@ export class UserController {
    *
    * @param {array} collection
    */
-  static async populateUserDetail(collection) {
+  static async populateUserDetailInCollection(collection) {
     const userIds = [];
     collection.forEach((item) => {
       userIds.push(mongoose.Types.ObjectId(item.user_id));
@@ -197,5 +197,18 @@ export class UserController {
     });
 
     return collection;
+  }
+
+  /**
+   * Put the user detail inside passed object.
+   *
+   * @param {object} object
+   */
+  static async populateUserDetailInObject(object) {
+    const userId = object.user_id;
+
+    object.userDetail = await User.findById(userId, '_id email');
+
+    return object;
   }
 }
