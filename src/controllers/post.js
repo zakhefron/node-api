@@ -22,7 +22,7 @@ export class PostController {
     posts.docs = await TagController.populateTagDetailInCollection(posts.docs);
     posts.docs = await UserController.populateUserDetailInCollection(posts.docs);
 
-    return res.status(HttpStatus.OK).json(posts)
+    return res.status(HttpStatus.OK).json(posts);
   }
 
   /**
@@ -34,7 +34,8 @@ export class PostController {
    */
   loadById(req, res) {
     const postId = req.params.postId;
-    return Post.findById(postId).lean()
+    return Post.findById(postId)
+      .lean()
       .then(async (post) => {
         post = await TagController.populateTagDetailInObject(post);
         post = await UserController.populateUserDetailInObject(post);

@@ -154,7 +154,8 @@ export class TagController {
     const tagId = req.params.tagId;
 
     // eslint-disable-next-line camelcase
-    Post.find({ tag_id: tagId }).lean()
+    Post.find({ tag_id: tagId })
+      .lean()
       .then(async (tags) => {
         tags = await UserController.populateUserDetail(tags);
         return res.status(HttpStatus.OK).json(tags);
@@ -176,21 +177,19 @@ export class TagController {
       tagIds.push(mongoose.Types.ObjectId(item.tag_id));
     });
 
-    const tags = await Tag.find(
-      {
-        _id: {
-          $in: tagIds,
-        },
-      }
-    );
+    const tags = await Tag.find({
+      _id: {
+        $in: tagIds,
+      },
+    });
 
     // transform tags key by tag_id
     const tagsKeyBy = [];
-    tags.forEach(tag => {
+    tags.forEach((tag) => {
       tagsKeyBy[tag['_id']] = tag;
     });
 
-    collection.forEach(item => {
+    collection.forEach((item) => {
       item.tagDetail = tagsKeyBy[item['tag_id']] || {};
     });
 
@@ -210,4 +209,3 @@ export class TagController {
     return object;
   }
 }
-

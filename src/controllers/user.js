@@ -188,11 +188,11 @@ export class UserController {
 
     // transform users key by user_id
     const usersKeyBy = [];
-    users.forEach(user => {
+    users.forEach((user) => {
       usersKeyBy[user['_id']] = user;
     });
 
-    collection.forEach(item => {
+    collection.forEach((item) => {
       item.userDetail = usersKeyBy[item['user_id']] || {};
     });
 
