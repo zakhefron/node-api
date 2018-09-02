@@ -7,7 +7,7 @@ import { generateJWTToken } from '../helpers/jwt';
 
 export class UserController {
   /**
-   * Get user from jwt.
+   * Get user from jwt token.
    *
    * @param {*} req
    * @param {*} res

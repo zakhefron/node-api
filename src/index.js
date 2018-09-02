@@ -9,6 +9,7 @@ import './utils/db';
 import routes from './routes';
 import { Config } from './helpers/config';
 import logger, { logStream } from './utils/logger';
+import { jwtMiddleware } from './middlewares/jwtMiddleware';
 
 // Initialize Raven
 // https://docs.sentry.io/clients/node/integrations/express/
@@ -24,6 +25,8 @@ app.use(cors());
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(jwtMiddleware);
 
 // API Routes
 app.use('/api', routes);

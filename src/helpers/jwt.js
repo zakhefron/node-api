@@ -1,7 +1,13 @@
-import jwt from 'jsonwebtoken';
+import jwt, { TokenExpiredError } from 'jsonwebtoken';
 
 import { Config } from './config';
 import { getJWTExpiresDate } from './common';
+
+const JWT_OPTIONS = {
+  algorithm: Config.get('JWT_ALGORITHM', 'HS256'),
+  expiresIn: parseInt(Config.get('JWT_EXPIRE', 3600)),
+};
+const JWT_SECRET = Config.get('JWT_SECRET', 'node-api');
 
 /**
  * Generate a jwt secret token for user.
@@ -9,15 +15,8 @@ import { getJWTExpiresDate } from './common';
  * @param {*} data
  */
 export const generateJWTToken = (data) => {
-  const jwtSecret = Config.get('JWT_SECRET', 'node-api');
-  const jwtAlgorithm = Config.get('JWT_ALGORITHM', 'HS256');
-  const jwtExpire = parseInt(Config.get('JWT_EXPIRE', 3600));
-
   return {
-    token: jwt.sign(data, jwtSecret, {
-      expiresIn: jwtExpire,
-      algorithm: jwtAlgorithm,
-    }),
+    token: jwt.sign(data, JWT_SECRET, JWT_OPTIONS),
     expireAt: getJWTExpiresDate(),
   };
 };
@@ -27,4 +26,18 @@ export const generateJWTToken = (data) => {
  *
  * @param {string} token
  */
-export const decodeJwtToken = (token) => {};
+export const decodeJwtToken = (token) => {
+  try {
+    return jwt.verify(token, JWT_SECRET, JWT_OPTIONS);
+  } catch (err) {
+    if (err instanceof TokenExpiredError) {
+      return {
+        message: 'Provided token is expired.',
+      };
+    }
+
+    return {
+      message: 'An error while decoding token.',
+    };
+  }
+};
