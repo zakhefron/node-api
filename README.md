@@ -12,7 +12,7 @@
       <img src="https://img.shields.io/codacy/grade/266923eec70e41418be8f981a5b4cefe.svg?style=flat-square"/>
     </a>
     <a href="https://www.paypal.me/meabed">
-      <img src="https://img.shields.io/badge/paypal-Buy_Me_Coffee-179BD7.svg?style=flat-squares" alt="Buy Me Coffee">
+      <img src="https://img.shields.io/badge/paypal-Buy_Me_Coffee-179BD7.svg?style=flat-square" alt="Buy Me Coffee">
     </a>
   </p>
 </p>
