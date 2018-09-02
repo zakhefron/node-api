@@ -12,17 +12,17 @@ export class TagController {
    *
    * @param {*} req
    * @param {*} res
-   * @return {Promise<T | never>}
+   * @return {Promise<Response>}
    */
-  loadAll(req, res) {
-    return Tag.find({}).lean()
-      .then( async (tags) => {
-        tags = await UserController.populateUserDetailInCollection(tags);
-        return res.status(HttpStatus.OK).json(tags);
-      })
-      .catch((err) => {
-        return res.json(Boom.internal(err));
-      });
+  async loadAll(req, res) {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+
+    const tags = await Tag.paginate({}, { page, limit, lean: true });
+
+    tags.docs = await UserController.populateUserDetailInCollection(tags.docs);
+
+    return res.status(HttpStatus.OK).json(tags);
   }
 
   /**

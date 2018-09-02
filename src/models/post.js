@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 
 const postSchema = new Schema({
   title: {
@@ -30,6 +31,8 @@ const postSchema = new Schema({
     default: Date.now,
   },
 });
+
+postSchema.plugin(mongoosePaginate);
 
 const Post = mongoose.model('Post', postSchema);
 

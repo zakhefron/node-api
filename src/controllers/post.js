@@ -11,18 +11,18 @@ export class PostController {
    *
    * @param {*} req
    * @param {*} res
-   * @return {Promise<T | never>}
+   * @return {Promise<Response>}
    */
-  loadAll(req, res) {
-    return Post.find({}).lean()
-      .then(async (posts) => {
-        posts = await UserController.populateUserDetailInCollection(posts);
-        posts = await TagController.populateTagDetailInCollection(posts);
-        return res.status(HttpStatus.OK).json(posts);
-      })
-      .catch((err) => {
-        return res.json(Boom.internal(err));
-      });
+  async loadAll(req, res) {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+
+    const posts = await Post.paginate({}, { page, limit, lean: true });
+
+    posts.docs = await TagController.populateTagDetailInCollection(posts.docs);
+    posts.docs = await UserController.populateUserDetailInCollection(posts.docs);
+
+    return res.status(HttpStatus.OK).json(posts)
   }
 
   /**
