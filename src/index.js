@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(
   jwtMiddleware.unless({
     // JWT Middleware won't run on the following paths.
-    path: ['/api/users/register'],
+    path: ['/api/users/register', '/api/users/login'],
   })
 );
 
