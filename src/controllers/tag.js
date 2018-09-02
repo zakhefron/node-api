@@ -153,8 +153,9 @@ export class TagController {
     const tagId = req.params.tagId;
 
     // eslint-disable-next-line camelcase
-    Post.find({ tag_id: tagId })
-      .then((tags) => {
+    Post.find({ tag_id: tagId }).lean()
+      .then(async (tags) => {
+        tags = await UserController.populateUserDetail(tags);
         return res.status(HttpStatus.OK).json(tags);
       })
       .catch((err) => {

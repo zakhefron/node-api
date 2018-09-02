@@ -2,6 +2,7 @@ import Boom from 'boom';
 import * as HttpStatus from 'http-status-codes';
 
 import Post from '../models/post';
+import { UserController } from './user';
 
 export class PostController {
   /**
@@ -12,8 +13,9 @@ export class PostController {
    * @return {Promise<T | never>}
    */
   loadAll(req, res) {
-    return Post.find({})
-      .then((posts) => {
+    return Post.find({}).lean()
+      .then(async (posts) => {
+        posts = await UserController.populateUserDetail(posts);
         return res.status(HttpStatus.OK).json(posts);
       })
       .catch((err) => {
